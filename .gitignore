@@ -6,3 +6,7 @@ plugins/
 
 #IDE
 .idea
+
+# Configs
+app/config/index.ts
+app/config/development.ts

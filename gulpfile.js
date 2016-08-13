@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     gulpWatch = require('gulp-watch'),
+    gulpRename = require('gulp-rename'),
     del = require('del'),
     runSequence = require('run-sequence'),
     argv = process.argv;
@@ -49,7 +50,7 @@ gulp.task('watch', ['clean'], function(done){
 
 gulp.task('build', ['clean'], function(done){
   runSequence(
-    ['sass', 'html', 'fonts', 'scripts'],
+    ['create-env-config', 'sass', 'html', 'fonts', 'scripts'],
     function(){
       buildBrowserify({
         minify: isRelease,
@@ -62,6 +63,15 @@ gulp.task('build', ['clean'], function(done){
       }).on('end', done);
     }
   );
+});
+
+gulp.task('create-env-config', () => {
+  let env = isRelease ? 'production' : 'development';
+  let path = './app/config';
+  return gulp
+    .src(`${path}/${env}.ts`)
+    .pipe(gulpRename('index.ts'))
+    .pipe(gulp.dest(path));
 });
 
 gulp.task('sass', buildSass);
