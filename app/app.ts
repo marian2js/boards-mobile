@@ -1,11 +1,15 @@
 import {Component} from '@angular/core';
 import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
+import {StorageService} from './services/storage.service';
 import {HomePage} from './pages/home/home';
 
 
 @Component({
-  template: '<ion-nav [root]="rootPage"></ion-nav>'
+  template: '<ion-nav [root]="rootPage"></ion-nav>',
+  providers: [
+    StorageService
+  ]
 })
 export class MyApp {
   rootPage: any = HomePage;
