@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>
+      Welcome to Live Boards
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="welcome">
+  <ion-card padding *ngIf="user">
+
+    <ion-card-title class="welcome-title">
+      Hello {{ user.firstName }}.
+    </ion-card-title>
+
+    <p class="welcome-description">
+      Please select your username to get started:
+    </p>
+
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Enter your username</ion-label>
+        <ion-input [(ngModel)]="user.username" type="text"></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <div padding>
+      <button block (click)="save()">Save</button>
+    </div>
+
+  </ion-card>
+</ion-content>

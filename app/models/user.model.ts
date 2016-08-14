@@ -7,4 +7,8 @@ export class User {
   gender: string;
   birthday: Date;
   createdAt: Date;
+
+  isNew() {
+    return !this.username;
+  }
 }

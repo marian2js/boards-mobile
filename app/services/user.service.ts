@@ -67,6 +67,14 @@ export class UserService extends ApiService {
   }
 
   /**
+   * Saves current user's data
+   */
+  saveCurrentUser(): Promise<any> {
+    let url = super.getApiUrl(this.currentUser.id);
+    return super.put(url, this.currentUser);
+  }
+
+  /**
    * Fetches user's access token
    */
   private requestAccessToken(id, code): Promise<string> {
