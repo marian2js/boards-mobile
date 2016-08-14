@@ -14,10 +14,10 @@ export class BoardService extends ApiService {
   createBoard(board: Board): Promise<Board> {
     let url = super.getApiUrl();
     return super.post(url, board)
-      .then(res => this.mapBoard(res));
+      .then(res => BoardService.mapBoard(res));
   }
 
-  private mapBoard(data): Board {
+  static mapBoard(data): Board {
     let board = new Board();
     board.id = data.id;
     board.name = data.name;

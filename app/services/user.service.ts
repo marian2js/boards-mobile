@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
+import {Board} from '../models/board.model';
 import {User} from '../models/user.model';
 import {ApiService} from './api.service';
+import {BoardService} from './board.service';
 import {StorageService} from './storage.service';
 
 const ENTITY_NAME = 'users';
@@ -72,6 +74,12 @@ export class UserService extends ApiService {
   saveCurrentUser(): Promise<any> {
     let url = super.getApiUrl(this.currentUser.id);
     return super.put(url, this.currentUser);
+  }
+
+  getUserBoards(): Promise<Array<Board>> {
+    let url = super.getApiUrl(this.currentUser.id, 'boards');
+    return super.get(url)
+      .then(boards => boards.map(board => BoardService.mapBoard(board)));
   }
 
   /**

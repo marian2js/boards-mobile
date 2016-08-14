@@ -1,0 +1,9 @@
+<div class="board-list">
+  <ion-card *ngFor="let board of boards" (click)="openBoard(board)">
+    <ion-card-content>
+      <ion-card-title>
+        {{ board.name }}
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card>
+</div>

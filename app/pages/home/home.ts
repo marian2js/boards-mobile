@@ -1,17 +1,21 @@
 import {Component} from '@angular/core';
 import {NavController, ModalController} from 'ionic-angular';
+import {Board} from '../../models/board.model';
 import {User} from '../../models/user.model';
 import {UserService} from '../../services/user.service';
 import {AuthPage} from '../auth/auth';
 import {BoardPage} from '../board/board';
 import {CreateBoardPage} from '../create-board/create-board';
 import {WelcomePage} from '../welcome/welcome';
+import {BoardList} from '../../components/board-list/board-list';
 
 @Component({
-  templateUrl: 'build/pages/home/home.html'
+  templateUrl: 'build/pages/home/home.html',
+  directives: [BoardList]
 })
 export class HomePage {
   private user: User;
+  boards: Array<Board> = [];
 
   constructor(private navCtrl: NavController,
               private modalCtrl: ModalController,
@@ -33,7 +37,9 @@ export class HomePage {
         }
 
         this.user = user;
-      });
+        return this.userService.getUserBoards();
+      })
+      .then(boards => this.boards = boards);
   }
 
   /**
