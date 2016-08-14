@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>
+      Create Board
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="create-board">
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Enter board name</ion-label>
+      <ion-input [(ngModel)]="board.name" type="text" [autofocus]></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div padding>
+    <button block (click)="create()">Create</button>
+  </div>
+</ion-content>

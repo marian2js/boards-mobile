@@ -4,6 +4,7 @@ import {StatusBar} from 'ionic-native';
 import {ApiService} from './services/api.service';
 import {AuthService} from './services/auth.service';
 import {UserService} from './services/user.service';
+import {BoardService} from './services/board.service';
 import {StorageService} from './services/storage.service';
 import {HomePage} from './pages/home/home';
 
@@ -13,6 +14,7 @@ import {HomePage} from './pages/home/home';
   providers: [
     ApiService,
     AuthService,
+    BoardService,
     StorageService,
     UserService
   ]

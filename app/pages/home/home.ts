@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, ModalController} from 'ionic-angular';
 import {User} from '../../models/user.model';
 import {UserService} from '../../services/user.service';
 import {AuthPage} from '../auth/auth';
+import {BoardPage} from '../board/board';
+import {CreateBoardPage} from '../create-board/create-board';
 import {WelcomePage} from '../welcome/welcome';
 
 @Component({
@@ -11,7 +13,9 @@ import {WelcomePage} from '../welcome/welcome';
 export class HomePage {
   private user: User;
 
-  constructor(private navCtrl: NavController, private userService: UserService) {
+  constructor(private navCtrl: NavController,
+              private modalCtrl: ModalController,
+              private userService: UserService) {
 
   }
 
@@ -30,5 +34,23 @@ export class HomePage {
 
         this.user = user;
       });
+  }
+
+  /**
+   * Open a modal for creating a new board
+   */
+  addIconTapped() {
+    let modal = this.modalCtrl.create(CreateBoardPage);
+    modal.onDidDismiss(board => this.openBoard(board));
+    modal.present();
+  }
+
+  /**
+   * Open a Board Page view
+   */
+  openBoard(board) {
+    this.navCtrl.push(BoardPage, {
+      board
+    });
   }
 }
