@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Board} from '../models/board.model';
+import {List} from '../models/list.model';
 import {ApiService} from './api.service';
+import {ListService} from './list.service';
 
 const ENTITY_NAME = 'boards';
 
@@ -15,6 +17,14 @@ export class BoardService extends ApiService {
     let url = super.getApiUrl();
     return super.post(url, board)
       .then(res => BoardService.mapBoard(res));
+  }
+
+  populateBoardLists(board: Board): Promise<any> {
+    let url = super.getApiUrl(board.id, 'lists');
+    return super.get(url)
+      .then(lists => {
+        board.lists = lists.map(list => ListService.mapList(list));
+      });
   }
 
   static mapBoard(data): Board {

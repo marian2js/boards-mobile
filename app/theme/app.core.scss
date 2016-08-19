@@ -3,5 +3,8 @@ button[fab] {
   z-index: 9999
 }
 
+@import "../pages/board/board";
 @import "../pages/home/home";
 @import "../pages/welcome/welcome";
+
+@import "../components/list-element/list-element";

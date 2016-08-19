@@ -1,0 +1,11 @@
+.board {
+  ion-scroll {
+    white-space: nowrap;
+    height: 100%;
+  }
+
+  ion-row,
+  .scroll-zoom-wrapper {
+    height: 100%;
+  }
+}

@@ -7,5 +7,13 @@
 </ion-header>
 
 <ion-content class="board">
+  <scroll-content *ngIf="board">
 
+    <ion-scroll scrollX="true" scrollY="true">
+      <ion-row>
+        <list-element *ngFor="let list of board.lists" [list]="list"></list-element>
+      </ion-row>
+    </ion-scroll>
+
+  </scroll-content>
 </ion-content>
