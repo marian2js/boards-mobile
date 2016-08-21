@@ -6,6 +6,7 @@ import {AuthService} from './services/auth.service';
 import {BoardService} from './services/board.service';
 import {ListService} from './services/list.service';
 import {StorageService} from './services/storage.service';
+import {TaskService} from './services/task.service';
 import {UserService} from './services/user.service';
 import {HomePage} from './pages/home/home';
 
@@ -18,6 +19,7 @@ import {HomePage} from './pages/home/home';
     BoardService,
     ListService,
     StorageService,
+    TaskService,
     UserService
   ]
 })

@@ -20,3 +20,7 @@
 
   </scroll-content>
 </ion-content>
+
+<button *ngIf="board && board.lists.length" fab fab-bottom fab-right (click)="addIconPressed()">
+  <ion-icon name="add"></ion-icon>
+</button>

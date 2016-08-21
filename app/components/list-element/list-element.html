@@ -3,6 +3,6 @@
     {{ list.name }}
   </div>
   <div class="list-body">
-
+    <task-element *ngFor="let task of list.tasks" [task]="task"></task-element>
   </div>
 </ion-col>

@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>
+      Create Task
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="create-task">
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Enter task name</ion-label>
+      <ion-input [(ngModel)]="task.name" type="text" [autofocus]></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>List</ion-label>
+      <ion-select [(ngModel)]="listIndex">
+        <ion-option *ngFor="let list of board.lists; let i = index" value="{{ i }}">
+          {{ list.name }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+
+  <div padding>
+    <button block (click)="create()">Create</button>
+  </div>
+</ion-content>
