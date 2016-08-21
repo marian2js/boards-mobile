@@ -3,6 +3,8 @@ button[fab] {
   z-index: 9999
 }
 
+@import 'dragula';
+
 @import "../pages/board/board";
 @import "../pages/home/home";
 @import "../pages/welcome/welcome";

@@ -23,6 +23,17 @@ export class TaskService extends ApiService {
       .then(res => TaskService.mapTask(res));
   }
 
+  updateTask(task: Task, list?: List): Promise<Task> {
+    let url = super.getApiUrl(task.id);
+    let taskData: any = {};
+    if (list) {
+      taskData.list = list.id;
+    }
+    taskData = Object.assign(taskData, task);
+    return super.put(url, taskData)
+      .then(res => TaskService.mapTask(res));
+  }
+
   static mapTask(data): Task {
     let task = new Task();
     task.id = data.id;

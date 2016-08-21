@@ -74,7 +74,17 @@ gulp.task('create-env-config', () => {
     .pipe(gulp.dest(path));
 });
 
-gulp.task('sass', buildSass);
+gulp.task('sass', () => {
+  return buildSass({
+    sassOptions: {
+      includePaths: [
+        'node_modules/ionic-angular',
+        'node_modules/ionicons/dist/scss',
+        'node_modules/dragula/dist/'
+      ]
+    }
+  })
+});
 gulp.task('html', copyHTML);
 gulp.task('fonts', copyFonts);
 gulp.task('scripts', copyScripts);
