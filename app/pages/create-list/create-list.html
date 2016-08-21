@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>
+      Create List
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="create-list">
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Enter list name</ion-label>
+      <ion-input [(ngModel)]="list.name" type="text" [autofocus]></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list radio-group [(ngModel)]="position" *ngIf="board.lists.length">
+    <ion-item>
+      <ion-label>At the beginning</ion-label>
+      <ion-radio item-left value="first"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>At the end</ion-label>
+      <ion-radio item-left value="last"></ion-radio>
+    </ion-item>
+
+    <ion-item *ngIf="board.lists.length > 1">
+      <ion-label>After:</ion-label>
+      <ion-radio item-left value="custom"></ion-radio>
+      <ion-select [(ngModel)]="customPosition" disabled="{{ position !== 'custom' }}">
+        <ion-option *ngFor="let list of board.lists; let f = first; let i = index"
+                    value="{{ i + 1 }}"
+                    selected="{{ f }}">
+          {{ list.name }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <div padding>
+    <button block (click)="create()">Create</button>
+  </div>
+</ion-content>

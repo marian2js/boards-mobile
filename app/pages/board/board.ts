@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {NavParams} from 'ionic-angular';
+import {NavParams, ModalController} from 'ionic-angular';
 import {Board} from '../../models/board.model';
 import {BoardService} from '../../services/board.service';
+import {CreateListPage} from '../create-list/create-list';
 import {ListElement} from '../../components/list-element/list-element';
 
 @Component({
@@ -11,7 +12,9 @@ import {ListElement} from '../../components/list-element/list-element';
 export class BoardPage {
   board: Board;
 
-  constructor(navParams: NavParams, private boardService: BoardService) {
+  constructor(navParams: NavParams,
+              private modalCtrl: ModalController,
+              private boardService: BoardService) {
     this.board = navParams.get('board');
   }
 
@@ -19,4 +22,10 @@ export class BoardPage {
     this.boardService.populateBoardLists(this.board);
   }
 
+  onCreateListPressed() {
+    let modal = this.modalCtrl.create(CreateListPage, {
+      board: this.board
+    });
+    modal.present();
+  }
 }

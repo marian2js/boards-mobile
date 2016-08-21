@@ -12,6 +12,9 @@
     <ion-scroll scrollX="true" scrollY="true">
       <ion-row>
         <list-element *ngFor="let list of board.lists" [list]="list"></list-element>
+        <ion-col>
+          <button (click)="onCreateListPressed()">Create List</button>
+        </ion-col>
       </ion-row>
     </ion-scroll>
 
