@@ -3,6 +3,11 @@
     <ion-title *ngIf="board">
       {{ board.name }}
     </ion-title>
+    <ion-buttons end>
+      <button (click)="moreIconPressed()">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

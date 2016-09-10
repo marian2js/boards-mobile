@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
+import {Printer} from 'ionic-native';
 import {Board} from '../models/board.model';
 import {Task} from '../models/task.model';
 import {ApiService} from './api.service';
@@ -39,6 +40,12 @@ export class BoardService extends ApiService {
             .sort((t1: Task, t2: Task) => t1.position - t2.position);
         });
       });
+  }
+
+  exportPrintableBoard(board: Board): Promise<any> {
+    let url = super.getApiUrl(board.id, 'export/printable');
+    return super.getFile(url, { format: 'html' })
+      .then(file => Printer.print(file, {}));
   }
 
   static mapBoard(data): Board {

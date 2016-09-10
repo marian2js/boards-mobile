@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavParams, ModalController} from 'ionic-angular';
+import {NavParams, ModalController, ActionSheetController} from 'ionic-angular';
 import {DragulaService} from 'ng2-dragula/src/app/providers/dragula.provider';
 import {Board} from '../../models/board.model';
 import {BoardService} from '../../services/board.service';
@@ -17,6 +17,7 @@ export class BoardPage {
   board: Board;
 
   constructor(navParams: NavParams,
+              private actionSheetCtrl: ActionSheetController,
               private dragulaService: DragulaService,
               private modalCtrl: ModalController,
               private boardService: BoardService,
@@ -76,5 +77,17 @@ export class BoardPage {
     }
 
     this.taskService.updateTask(task, list);
+  }
+
+  moreIconPressed() {
+    this.actionSheetCtrl.create({
+      buttons: [{
+        text: 'Print',
+        icon: 'print',
+        handler: () => {
+          this.boardService.exportPrintableBoard(this.board);
+        }
+      }]
+    }).present();
   }
 }

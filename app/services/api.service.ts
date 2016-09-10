@@ -32,15 +32,7 @@ export abstract class ApiService {
     let options = {
       headers: ApiService.getApiHeaders()
     };
-
-    // Append the query to the URL
-    url += '?';
-    for (var key in query) {
-      if (query.hasOwnProperty(key) && query[key]) {
-        url += `${key}=${query[key]}&`
-      }
-    }
-
+    url += ApiService.queryToString(query);
     return this.http.get(url, options)
       .map(res => res.json())
       .toPromise();
@@ -83,6 +75,19 @@ export abstract class ApiService {
   }
 
   /**
+   * Request a file to an API endpoint
+   */
+  protected getFile(url: string, query = {}): Promise<any> {
+    let options = {
+      headers: ApiService.getApiHeaders()
+    };
+    url += ApiService.queryToString(query);
+    return this.http.get(url, options)
+      .toPromise()
+      .then((res: any) => res._body);
+  }
+
+  /**
    * Default headers for requesting an API endpoint
    */
   private static getApiHeaders(): Headers {
@@ -92,6 +97,19 @@ export abstract class ApiService {
     }
     headers.append('Content-Type', 'application/json');
     return headers;
+  }
+
+  /**
+   * Converts an object into a query string
+   */
+  private static queryToString(query = {}): string {
+    let url = '?';
+    for (let key in query) {
+      if (query.hasOwnProperty(key) && query[key]) {
+        url += `${key}=${query[key]}&`
+      }
+    }
+    return url;
   }
 
 }
