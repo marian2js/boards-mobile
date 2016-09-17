@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
+import {NavController} from 'ionic-angular';
 import {Task} from '../../models/task.model';
+import {TaskPage} from '../../pages/task/task';
 
 /**
  * Displays a task element
@@ -11,7 +13,16 @@ import {Task} from '../../models/task.model';
 export class TaskElement {
   @Input() task: Task;
 
-  constructor() {
+  constructor(private navCtrl: NavController) {
 
+  }
+
+  /**
+   * Open Task Page
+   */
+  openTask() {
+    this.navCtrl.push(TaskPage, {
+      task: this.task
+    });
   }
 }

@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title *ngIf="task">
+      {{ task.name }}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="task" *ngIf="task" padding>
+  {{ task.name }}
+</ion-content>
