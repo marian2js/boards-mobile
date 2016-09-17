@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
+import {Transfer} from 'ionic-native';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import {config} from '../config';
@@ -88,14 +89,29 @@ export abstract class ApiService {
   }
 
   /**
+   * Upload a file to an API endpoint
+   */
+  protected uploadFile(url: string, file: string, key: string): Promise<any> {
+    let options = {
+      fileKey: key,
+      headers: ApiService.getApiHeaders(false)
+    };
+    const fileTransfer = new Transfer();
+    return fileTransfer.upload(file, url, options)
+      .then(data => JSON.parse(data.response));
+  }
+
+  /**
    * Default headers for requesting an API endpoint
    */
-  private static getApiHeaders(): Headers {
+  private static getApiHeaders(json = true): Headers {
     let headers = new Headers();
     if (ApiService.accessToken) {
       headers.append('Authorization', `Bearer ${ApiService.accessToken}`);
     }
-    headers.append('Content-Type', 'application/json');
+    if (json) {
+      headers.append('Content-Type', 'application/json');
+    }
     return headers;
   }
 

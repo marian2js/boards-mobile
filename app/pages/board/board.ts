@@ -7,6 +7,7 @@ import {TaskService} from '../../services/task.service';
 import {CreateListPage} from '../create-list/create-list';
 import {CreateTaskPage} from '../create-task/create-task';
 import {ListElement} from '../../components/list-element/list-element';
+import {PictureService} from '../../services/picture.service';
 
 @Component({
   templateUrl: 'build/pages/board/board.html',
@@ -21,7 +22,8 @@ export class BoardPage {
               private dragulaService: DragulaService,
               private modalCtrl: ModalController,
               private boardService: BoardService,
-              private taskService: TaskService) {
+              private taskService: TaskService,
+              private pictureService: PictureService) {
     this.board = navParams.get('board');
 
     dragulaService.dropModel.subscribe(args => this.onElementDropped(args));
@@ -82,6 +84,13 @@ export class BoardPage {
   moreIconPressed() {
     this.actionSheetCtrl.create({
       buttons: [{
+        text: 'Upload physical board',
+        icon: 'camera',
+        handler: () => {
+          this.pictureService.getPicture()
+            .then(image => this.boardService.importPrintableBoard(this.board, image));
+        }
+      }, {
         text: 'Print',
         icon: 'print',
         handler: () => {
