@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {Transfer} from 'ionic-native';
+import {Subject} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import {config} from '../config';
@@ -8,6 +9,8 @@ import {config} from '../config';
 @Injectable()
 export abstract class ApiService {
   protected static accessToken: string;
+  static requestStartEmitter: Subject<any> = new Subject();
+  static requestEndEmitter: Subject<any> = new Subject();
 
   constructor(protected entity: string, private http: Http) {
 
@@ -30,75 +33,103 @@ export abstract class ApiService {
    * Makes a GET request to an API endpoint
    */
   protected get(url: string, query = {}): Promise<any> {
+    ApiService.requestStartEmitter.next(null);
     let options = {
       headers: ApiService.getApiHeaders()
     };
     url += ApiService.queryToString(query);
     return this.http.get(url, options)
       .map(res => res.json())
-      .toPromise();
+      .toPromise()
+      .then(data => {
+        ApiService.requestEndEmitter.next(null);
+        return data;
+      });
   }
 
   /**
    * Makes a POST request to an API endpoint
    */
   protected post(url: string, body = {}): Promise<any> {
+    ApiService.requestStartEmitter.next(null);
     let options = {
       headers: ApiService.getApiHeaders()
     };
     return this.http.post(url, body, options)
       .map(res => res.json())
-      .toPromise();
+      .toPromise()
+      .then(data => {
+        ApiService.requestEndEmitter.next(null);
+        return data;
+      });
   }
 
   /**
    * Makes a PUT request to an API endpoint
    */
   protected put(url: string, body = {}): Promise<any> {
+    ApiService.requestStartEmitter.next(null);
     let options = {
       headers: ApiService.getApiHeaders()
     };
     return this.http.put(url, body, options)
       .map(res => res.json())
-      .toPromise();
+      .toPromise()
+      .then(data => {
+        ApiService.requestEndEmitter.next(null);
+        return data;
+      });
   }
 
   /**
    * Makes a DELETE request to an API endpoint
    */
   protected delete(url: string): Promise<any> {
+    ApiService.requestStartEmitter.next(null);
     let options = {
       headers: ApiService.getApiHeaders()
     };
     return this.http.delete(url, options)
       .map(res => res.json())
-      .toPromise();
+      .toPromise()
+      .then(data => {
+        ApiService.requestEndEmitter.next(null);
+        return data;
+      });
   }
 
   /**
    * Request a file to an API endpoint
    */
   protected getFile(url: string, query = {}): Promise<any> {
+    ApiService.requestStartEmitter.next(null);
     let options = {
       headers: ApiService.getApiHeaders()
     };
     url += ApiService.queryToString(query);
     return this.http.get(url, options)
       .toPromise()
-      .then((res: any) => res._body);
+      .then((res: any) => {
+        ApiService.requestEndEmitter.next(null);
+        return res._body;
+      });
   }
 
   /**
    * Upload a file to an API endpoint
    */
   protected uploadFile(url: string, file: string, key: string): Promise<any> {
+    ApiService.requestStartEmitter.next(null);
     let options = {
       fileKey: key,
       headers: ApiService.getApiHeaders(false)
     };
     const fileTransfer = new Transfer();
     return fileTransfer.upload(file, url, options)
-      .then(data => JSON.parse(data.response));
+      .then(data => {
+        ApiService.requestEndEmitter.next(null);
+        return JSON.parse(data.response);
+      });
   }
 
   /**

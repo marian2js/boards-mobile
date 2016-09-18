@@ -5,6 +5,7 @@ import {ApiService} from './services/api.service';
 import {AuthService} from './services/auth.service';
 import {BoardService} from './services/board.service';
 import {ListService} from './services/list.service';
+import {LoadingService} from './services/loading.service';
 import {PictureService} from './services/picture.service';
 import {StorageService} from './services/storage.service';
 import {TaskService} from './services/task.service';
@@ -19,6 +20,7 @@ import {HomePage} from './pages/home/home';
     AuthService,
     BoardService,
     ListService,
+    LoadingService,
     PictureService,
     StorageService,
     TaskService,
@@ -28,11 +30,10 @@ import {HomePage} from './pages/home/home';
 export class MyApp {
   rootPage: any = HomePage;
 
-  constructor(platform: Platform) {
+  constructor(platform: Platform, loadingService: LoadingService) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+      loadingService.start();
     });
   }
 }
