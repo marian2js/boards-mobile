@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, ModalController} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 import {Board} from '../../models/board.model';
 import {User} from '../../models/user.model';
 import {UserService} from '../../services/user.service';
@@ -18,7 +18,6 @@ export class HomePage {
   boards: Array<Board> = [];
 
   constructor(private navCtrl: NavController,
-              private modalCtrl: ModalController,
               private userService: UserService) {
 
   }
@@ -46,9 +45,7 @@ export class HomePage {
    * Open a modal for creating a new board
    */
   addIconTapped() {
-    let modal = this.modalCtrl.create(CreateBoardPage);
-    modal.onDidDismiss(board => this.openBoard(board));
-    modal.present();
+    this.navCtrl.push(CreateBoardPage);
   }
 
   /**

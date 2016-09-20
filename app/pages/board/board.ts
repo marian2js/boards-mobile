@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavParams, ModalController, ActionSheetController} from 'ionic-angular';
+import {NavParams, ActionSheetController, NavController} from 'ionic-angular';
 import {DragulaService} from 'ng2-dragula/src/app/providers/dragula.provider';
 import {Board} from '../../models/board.model';
 import {BoardService} from '../../services/board.service';
@@ -18,9 +18,9 @@ export class BoardPage {
   board: Board;
 
   constructor(navParams: NavParams,
+              private navCtrl: NavController,
               private actionSheetCtrl: ActionSheetController,
               private dragulaService: DragulaService,
-              private modalCtrl: ModalController,
               private boardService: BoardService,
               private taskService: TaskService,
               private pictureService: PictureService) {
@@ -35,17 +35,15 @@ export class BoardPage {
   }
 
   onCreateListPressed() {
-    let modal = this.modalCtrl.create(CreateListPage, {
+    this.navCtrl.push(CreateListPage, {
       board: this.board
     });
-    modal.present();
   }
 
   addIconPressed() {
-    let modal = this.modalCtrl.create(CreateTaskPage, {
+    this.navCtrl.push(CreateTaskPage, {
       board: this.board
     });
-    modal.present();
   }
 
   /**

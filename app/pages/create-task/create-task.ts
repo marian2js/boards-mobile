@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ViewController, NavParams} from 'ionic-angular';
+import {NavParams, NavController} from 'ionic-angular';
 import {Board} from '../../models/board.model';
 import {Task} from '../../models/task.model';
 import {TaskService} from '../../services/task.service';
@@ -20,7 +20,7 @@ export class CreateTaskPage {
   private listIndex = 0;
 
   constructor(params: NavParams,
-              private viewCtrl: ViewController,
+              private navCtrl: NavController,
               private taskService: TaskService) {
     this.board = params.get('board');
   }
@@ -32,6 +32,6 @@ export class CreateTaskPage {
     let list = this.board.lists[this.listIndex];
     this.task.position = list.tasks.length;
     this.taskService.createTask(this.task, list, this.board)
-      .then(task => this.viewCtrl.dismiss(task));
+      .then(() => setTimeout(() => this.navCtrl.pop(), 500));
   }
 }

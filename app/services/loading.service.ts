@@ -17,7 +17,8 @@ export class LoadingService {
 
   private onRequestStart() {
     this.loader = this.loadingCtrl.create({
-      content: "Loading..."
+      content: "Loading...",
+      dismissOnPageChange: true
     });
     this.loader.present();
   }

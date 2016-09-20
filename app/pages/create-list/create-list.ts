@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ViewController, NavParams} from 'ionic-angular';
+import {NavParams, NavController} from 'ionic-angular';
 import {Board} from '../../models/board.model';
 import {List} from '../../models/list.model';
 import {ListService} from '../../services/list.service';
@@ -21,7 +21,7 @@ export class CreateListPage {
   private position;
 
   constructor(params: NavParams,
-              private viewCtrl: ViewController,
+              private navCtrl: NavController,
               private listService: ListService) {
     this.board = params.get('board');
   }
@@ -44,6 +44,6 @@ export class CreateListPage {
         this.list.position = 0;
     }
     this.listService.createList(this.list, this.board)
-      .then(list => this.viewCtrl.dismiss(list));
+      .then(() => setTimeout(() => this.navCtrl.pop(), 500));
   }
 }
