@@ -1,17 +1,22 @@
 <ion-header>
   <ion-navbar primary>
     <ion-title>
-      Create Task
+      Create Item
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content class="create-task">
+<ion-content class="create-item">
   <ion-list>
 
     <ion-item>
-      <ion-label floating>Enter task name</ion-label>
-      <ion-input [(ngModel)]="task.name" type="text" [autofocus]></ion-input>
+      <ion-label floating>Enter item name</ion-label>
+      <ion-input [(ngModel)]="item.name" type="text" [autofocus]></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Item Description</ion-label>
+      <ion-textarea [(ngModel)]="item.description"></ion-textarea>
     </ion-item>
 
     <ion-item>

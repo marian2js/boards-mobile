@@ -1,37 +1,37 @@
 import {Component} from '@angular/core';
 import {NavParams, NavController} from 'ionic-angular';
 import {Board} from '../../models/board.model';
-import {Task} from '../../models/task.model';
-import {TaskService} from '../../services/task.service';
+import {Item} from '../../models/item.model';
+import {ItemService} from '../../services/item.service';
 import {Autofocus} from '../../directives/autofocus/autofocus';
 
 @Component({
-  templateUrl: 'build/pages/create-task/create-task.html',
+  templateUrl: 'build/pages/create-item/create-item.html',
   providers: [
-    TaskService
+    ItemService
   ],
   directives: [
     Autofocus
   ]
 })
-export class CreateTaskPage {
-  private task: Task = new Task();
+export class CreateItemPage {
+  private item: Item = new Item();
   private board: Board;
   private listIndex = 0;
 
   constructor(params: NavParams,
               private navCtrl: NavController,
-              private taskService: TaskService) {
+              private itemService: ItemService) {
     this.board = params.get('board');
   }
 
   /**
-   * Create the task and close this modal
+   * Create the item and close this modal
    */
   create() {
     let list = this.board.lists[this.listIndex];
-    this.task.position = list.tasks.length;
-    this.taskService.createTask(this.task, list, this.board)
+    this.item.position = list.items.length;
+    this.itemService.createItem(this.item, list, this.board)
       .then(() => setTimeout(() => this.navCtrl.pop(), 500));
   }
 }

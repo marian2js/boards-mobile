@@ -2,9 +2,9 @@
   <div class="list-header">
     {{ list.name }}
   </div>
-  <div class="list-body" [dragula]='"tasks-bag"' [dragulaModel]="list.tasks">
-    <task-element *ngFor="let task of list.tasks"
-                  [task]="task"
-                  [attr.data-task-id]="task.id"></task-element>
+  <div class="list-body" [dragula]='"items-bag"' [dragulaModel]="list.items">
+    <item-element *ngFor="let item of list.items"
+                  [item]="item"
+                  [attr.data-item-id]="item.id"></item-element>
   </div>
 </ion-col>

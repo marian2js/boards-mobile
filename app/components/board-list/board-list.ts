@@ -3,6 +3,9 @@ import {NavController} from 'ionic-angular';
 import {Board} from '../../models/board.model';
 import {BoardPage} from '../../pages/board/board';
 
+/**
+ * Displays a list of boards
+ */
 @Component({
   selector: 'board-list',
   templateUrl: 'build/components/board-list/board-list.html'

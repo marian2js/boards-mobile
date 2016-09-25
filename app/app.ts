@@ -8,7 +8,7 @@ import {ListService} from './services/list.service';
 import {LoadingService} from './services/loading.service';
 import {PictureService} from './services/picture.service';
 import {StorageService} from './services/storage.service';
-import {TaskService} from './services/task.service';
+import {ItemService} from './services/item.service';
 import {UserService} from './services/user.service';
 import {HomePage} from './pages/home/home';
 
@@ -23,7 +23,7 @@ import {HomePage} from './pages/home/home';
     LoadingService,
     PictureService,
     StorageService,
-    TaskService,
+    ItemService,
     UserService
   ]
 })

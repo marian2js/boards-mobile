@@ -1,9 +1,9 @@
-import {Task} from './task.model';
+import {Item} from './item.model';
 
 export class List {
   id: string;
   name: string;
   position: number;
-  tasks: Array<Task> = [];
+  items: Array<Item> = [];
   createdAt: Date;
 }

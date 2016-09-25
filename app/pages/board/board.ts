@@ -3,9 +3,9 @@ import {NavParams, ActionSheetController, NavController} from 'ionic-angular';
 import {DragulaService} from 'ng2-dragula/src/app/providers/dragula.provider';
 import {Board} from '../../models/board.model';
 import {BoardService} from '../../services/board.service';
-import {TaskService} from '../../services/task.service';
+import {ItemService} from '../../services/item.service';
 import {CreateListPage} from '../create-list/create-list';
-import {CreateTaskPage} from '../create-task/create-task';
+import {CreateItemPage} from '../create-item/create-item';
 import {ListElement} from '../../components/list-element/list-element';
 import {PictureService} from '../../services/picture.service';
 
@@ -22,7 +22,7 @@ export class BoardPage {
               private actionSheetCtrl: ActionSheetController,
               private dragulaService: DragulaService,
               private boardService: BoardService,
-              private taskService: TaskService,
+              private itemService: ItemService,
               private pictureService: PictureService) {
     this.board = navParams.get('board');
 
@@ -31,7 +31,7 @@ export class BoardPage {
 
   ionViewWillEnter() {
     this.boardService.populateBoardLists(this.board)
-      .then(() => this.boardService.populateBoardTasks(this.board));
+      .then(() => this.boardService.populateBoardItems(this.board));
   }
 
   onCreateListPressed() {
@@ -41,7 +41,7 @@ export class BoardPage {
   }
 
   addIconPressed() {
-    this.navCtrl.push(CreateTaskPage, {
+    this.navCtrl.push(CreateItemPage, {
       board: this.board
     });
   }
@@ -51,32 +51,32 @@ export class BoardPage {
    */
   private onElementDropped(args) {
     switch (args[0]) {
-      case 'tasks-bag':
-        return this.onTaskDropped(args.slice(0));
+      case 'items-bag':
+        return this.onItemDropped(args.slice(0));
     }
   }
 
   /**
-   * Fired when a task is dropped in a different position
+   * Fired when an item is dropped in a different position
    */
-  private onTaskDropped(args) {
-    let taskId = args[1].dataset.taskId;
+  private onItemDropped(args) {
+    let itemId = args[1].dataset.itemId;
     let list;
-    let task;
+    let item;
 
-    // Find list and task models
+    // Find list and item models
     for (let i = 0; i < this.board.lists.length; i++) {
-      let taskIndex;
+      let itemIndex;
       list = this.board.lists[i];
-      taskIndex = list.tasks.findIndex(task => task.id === taskId);
-      if (taskIndex !== -1) {
-        task = list.tasks[taskIndex];
-        task.position = taskIndex;
+      itemIndex = list.items.findIndex(item => item.id === itemId);
+      if (itemIndex !== -1) {
+        item = list.items[itemIndex];
+        item.position = itemIndex;
         break;
       }
     }
 
-    this.taskService.updateTask(task, list);
+    this.itemService.updateItem(item, list);
   }
 
   moreIconPressed() {

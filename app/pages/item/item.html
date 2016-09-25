@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title *ngIf="item">
+      {{ item.name }}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="item" *ngIf="item" padding>
+  <div (click)="toggleNameEditable()">
+    <div *ngIf="!nameEditable">
+      {{ item.name }}
+    </div>
+    <div *ngIf="nameEditable">
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Username</ion-label>
+          <ion-input [(ngModel)]="item.name" type="text"></ion-input>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

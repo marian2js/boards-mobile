@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Printer} from 'ionic-native';
 import {Board} from '../models/board.model';
-import {Task} from '../models/task.model';
+import {Item} from '../models/item.model';
 import {ApiService} from './api.service';
 import {ListService} from './list.service';
-import {TaskService} from './task.service';
+import {ItemService} from './item.service';
 
 const ENTITY_NAME = 'boards';
 
@@ -27,10 +27,10 @@ export class BoardService extends ApiService {
       .then(lists => this.setLists(board, lists));
   }
 
-  populateBoardTasks(board: Board): Promise<any> {
-    let url = super.getApiUrl(board.id, 'tasks');
+  populateBoardItems(board: Board): Promise<any> {
+    let url = super.getApiUrl(board.id, 'items');
     return super.get(url)
-      .then(tasks => this.setTasks(board, tasks));
+      .then(items => this.setItems(board, items));
   }
 
   exportPrintableBoard(board: Board): Promise<any> {
@@ -44,7 +44,7 @@ export class BoardService extends ApiService {
     return super.uploadFile(url, image, 'image')
       .then(res => {
         this.setLists(board, res.lists);
-        this.setTasks(board, res.tasks);
+        this.setItems(board, res.items);
       });
   }
 
@@ -52,12 +52,12 @@ export class BoardService extends ApiService {
     board.lists = lists.map(list => ListService.mapList(list));
   }
 
-  private setTasks(board: Board, tasks: Array<any>) {
+  private setItems(board: Board, items: Array<any>) {
     board.lists.forEach(list => {
-      list.tasks = tasks
-        .filter(task => task.list === list.id)
-        .map(task => TaskService.mapTask(task))
-        .sort((t1: Task, t2: Task) => t1.position - t2.position);
+      list.items = items
+        .filter(item => item.list === list.id)
+        .map(item => ItemService.mapItem(item))
+        .sort((t1: Item, t2: Item) => t1.position - t2.position);
     });
   }
 
