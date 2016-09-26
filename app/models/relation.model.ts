@@ -1,6 +1,6 @@
 import {Item} from './item.model';
 
-export class List {
+export class Relation {
   id: string;
   name: string;
   position: number;

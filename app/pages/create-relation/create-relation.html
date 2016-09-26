@@ -1,20 +1,20 @@
 <ion-header>
   <ion-navbar primary>
     <ion-title>
-      Create List
+      Create Relation
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content class="create-list">
+<ion-content class="create-relation">
   <ion-list>
     <ion-item>
-      <ion-label floating>Enter list name</ion-label>
-      <ion-input [(ngModel)]="list.name" type="text" [autofocus]></ion-input>
+      <ion-label floating>Enter relation name</ion-label>
+      <ion-input [(ngModel)]="relation.name" type="text" [autofocus]></ion-input>
     </ion-item>
   </ion-list>
 
-  <ion-list radio-group [(ngModel)]="position" *ngIf="board.lists.length">
+  <ion-list radio-group [(ngModel)]="position" *ngIf="board.relations.length">
     <ion-item>
       <ion-label>At the beginning</ion-label>
       <ion-radio item-left value="first"></ion-radio>
@@ -25,14 +25,14 @@
       <ion-radio item-left value="last"></ion-radio>
     </ion-item>
 
-    <ion-item *ngIf="board.lists.length > 1">
+    <ion-item *ngIf="board.relations.length > 1">
       <ion-label>After:</ion-label>
       <ion-radio item-left value="custom"></ion-radio>
       <ion-select [(ngModel)]="customPosition" disabled="{{ position !== 'custom' }}">
-        <ion-option *ngFor="let list of board.lists; let f = first; let i = index"
+        <ion-option *ngFor="let relation of board.relations; let f = first; let i = index"
                     value="{{ i + 1 }}"
                     selected="{{ f }}">
-          {{ list.name }}
+          {{ relation.name }}
         </ion-option>
       </ion-select>
     </ion-item>

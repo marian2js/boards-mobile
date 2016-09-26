@@ -1,0 +1,10 @@
+<ion-col class="relation-element">
+  <div class="relation-header">
+    {{ relation.name }}
+  </div>
+  <div class="relation-body" [dragula]='"items-bag"' [dragulaModel]="relation.items">
+    <item-element *ngFor="let item of relation.items"
+                  [item]="item"
+                  [attr.data-item-id]="item.id"></item-element>
+  </div>
+</ion-col>

@@ -1,8 +1,8 @@
-import {List} from './list.model';
+import {Relation} from './relation.model';
 
 export class Board {
   id: string;
   name: string;
-  lists: Array<List> = [];
+  relations: Array<Relation> = [];
   createdAt: Date;
 }

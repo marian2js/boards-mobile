@@ -1,18 +1,18 @@
 import {Component, Input} from '@angular/core';
 import {Dragula} from 'ng2-dragula/src/app/directives/dragula.directive';
-import {List} from '../../models/list.model';
+import {Relation} from '../../models/relation.model';
 import {ItemElement} from '../item-element/item-element';
 
 /**
- * Displays a list element
+ * Displays a relation element
  */
 @Component({
-  selector: 'list-element',
-  templateUrl: 'build/components/list-element/list-element.html',
+  selector: 'relation-element',
+  templateUrl: 'build/components/relation-element/relation-element.html',
   directives: [ItemElement, Dragula]
 })
-export class ListElement {
-  @Input() list: List;
+export class RelationElement {
+  @Input() relation: Relation;
 
   constructor() {
 

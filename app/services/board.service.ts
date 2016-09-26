@@ -4,7 +4,7 @@ import {Printer} from 'ionic-native';
 import {Board} from '../models/board.model';
 import {Item} from '../models/item.model';
 import {ApiService} from './api.service';
-import {ListService} from './list.service';
+import {RelationService} from './relation.service';
 import {ItemService} from './item.service';
 
 const ENTITY_NAME = 'boards';
@@ -21,10 +21,10 @@ export class BoardService extends ApiService {
       .then(res => BoardService.mapBoard(res));
   }
 
-  populateBoardLists(board: Board): Promise<any> {
-    let url = super.getApiUrl(board.id, 'lists');
+  populateBoardRelations(board: Board): Promise<any> {
+    let url = super.getApiUrl(board.id, 'relations');
     return super.get(url)
-      .then(lists => this.setLists(board, lists));
+      .then(relations => this.setRelations(board, relations));
   }
 
   populateBoardItems(board: Board): Promise<any> {
@@ -43,19 +43,19 @@ export class BoardService extends ApiService {
     let url = super.getApiUrl(board.id, 'import/printable');
     return super.uploadFile(url, image, 'image')
       .then(res => {
-        this.setLists(board, res.lists);
+        this.setRelations(board, res.relations);
         this.setItems(board, res.items);
       });
   }
 
-  private setLists(board: Board, lists: Array<any>) {
-    board.lists = lists.map(list => ListService.mapList(list));
+  private setRelations(board: Board, relations: Array<any>) {
+    board.relations = relations.map(relation => RelationService.mapRelation(relation));
   }
 
   private setItems(board: Board, items: Array<any>) {
-    board.lists.forEach(list => {
-      list.items = items
-        .filter(item => item.list === list.id)
+    board.relations.forEach(relation => {
+      relation.items = items
+        .filter(item => item.relation === relation.id)
         .map(item => ItemService.mapItem(item))
         .sort((t1: Item, t2: Item) => t1.position - t2.position);
     });

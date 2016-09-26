@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Board} from '../models/board.model';
-import {List} from '../models/list.model';
+import {Relation} from '../models/relation.model';
 import {Item} from '../models/item.model';
 import {ApiService} from './api.service';
 
@@ -13,21 +13,21 @@ export class ItemService extends ApiService {
     super(ENTITY_NAME, http);
   }
 
-  createItem(item: Item, list: List, board: Board): Promise<Item> {
+  createItem(item: Item, relation: Relation, board: Board): Promise<Item> {
     let url = super.getApiUrl();
     let itemData = Object.assign({
       board: board.id,
-      list: list.id,
+      relation: relation.id,
     }, item);
     return super.post(url, itemData)
       .then(res => ItemService.mapItem(res));
   }
 
-  updateItem(item: Item, list?: List): Promise<Item> {
+  updateItem(item: Item, relation?: Relation): Promise<Item> {
     let url = super.getApiUrl(item.id);
     let itemData: any = {};
-    if (list) {
-      itemData.list = list.id;
+    if (relation) {
+      itemData.relation = relation.id;
     }
     itemData = Object.assign(itemData, item);
     return super.put(url, itemData)

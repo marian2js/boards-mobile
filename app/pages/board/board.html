@@ -16,9 +16,9 @@
 
     <ion-scroll scrollX="true" scrollY="true">
       <ion-row>
-        <list-element *ngFor="let list of board.lists" [list]="list"></list-element>
+        <relation-element *ngFor="let relation of board.relations" [relation]="relation"></relation-element>
         <ion-col>
-          <button (click)="onCreateListPressed()">Create List</button>
+          <button (click)="onCreateRelationPressed()">Create Relation</button>
         </ion-col>
       </ion-row>
     </ion-scroll>
@@ -26,6 +26,6 @@
   </scroll-content>
 </ion-content>
 
-<button *ngIf="board && board.lists.length" fab fab-bottom fab-right (click)="addIconPressed()">
+<button *ngIf="board && board.relations.length" fab fab-bottom fab-right (click)="addIconPressed()">
   <ion-icon name="add"></ion-icon>
 </button>

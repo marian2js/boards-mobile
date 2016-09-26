@@ -4,7 +4,7 @@ import {StatusBar} from 'ionic-native';
 import {ApiService} from './services/api.service';
 import {AuthService} from './services/auth.service';
 import {BoardService} from './services/board.service';
-import {ListService} from './services/list.service';
+import {RelationService} from './services/relation.service';
 import {LoadingService} from './services/loading.service';
 import {PictureService} from './services/picture.service';
 import {StorageService} from './services/storage.service';
@@ -19,7 +19,7 @@ import {HomePage} from './pages/home/home';
     ApiService,
     AuthService,
     BoardService,
-    ListService,
+    RelationService,
     LoadingService,
     PictureService,
     StorageService,

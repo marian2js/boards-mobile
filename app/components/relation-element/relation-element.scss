@@ -1,4 +1,4 @@
-.list-element {
+.relation-element {
   background-color: #e9e9e9;
   width: 250px;
   height: 100%;
@@ -6,7 +6,7 @@
   padding: 0 0 3px 0;
   min-height: 100%;
 
-  .list-header {
+  .relation-header {
     background-color: #d2d1d1;
     text-align: center;
     padding: 10px 0;
@@ -14,7 +14,7 @@
     font-size: 16px;
   }
 
-  .list-body {
+  .relation-body {
     // Allows dropping items at the bottom of the list
     height: 100%;
   }

@@ -20,10 +20,10 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>List</ion-label>
-      <ion-select [(ngModel)]="listIndex">
-        <ion-option *ngFor="let list of board.lists; let i = index" value="{{ i }}">
-          {{ list.name }}
+      <ion-label>Relation</ion-label>
+      <ion-select [(ngModel)]="relationIndex">
+        <ion-option *ngFor="let relation of board.relations; let i = index" value="{{ i }}">
+          {{ relation.name }}
         </ion-option>
       </ion-select>
     </ion-item>
