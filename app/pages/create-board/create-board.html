@@ -12,6 +12,14 @@
       <ion-label floating>Enter board name</ion-label>
       <ion-input [(ngModel)]="board.name" type="text" [autofocus]></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label> Vertical Relation</ion-label>
+      <ion-toggle [(ngModel)]="board.verticalRelationEnabled"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label> Horizontal Relation</ion-label>
+      <ion-toggle [(ngModel)]="board.horizontalRelationEnabled"></ion-toggle>
+    </ion-item>
   </ion-list>
 
   <div padding>

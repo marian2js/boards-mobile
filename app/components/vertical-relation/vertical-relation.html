@@ -1,0 +1,24 @@
+<ion-col class="vertical-relation">
+  <div class="relation-header">
+    {{ relation.name }}
+  </div>
+  <div class="relation-body" *ngIf="items && items.length">
+    <div *ngFor="let horizontalRelation of board.horizontalRelations; let i = index"
+         [dragula]='"items-bag"' [dragulaModel]="items[i]"
+         id="{{ relation.id }}-{{ horizontalRelation.id }}"
+         [style.height.px]="55 * board.getMaxItemsPerHorizontalRelation(horizontalRelation)"
+         class="relation-items">
+      <item-element *ngFor="let item of items[i]"
+                    [item]="item"
+                    [attr.data-item-id]="item.id"></item-element>
+    </div>
+    <div *ngIf="!board.horizontalRelationEnabled"
+         [dragula]='"items-bag"' [dragulaModel]="items[0]"
+         id="{{ relation.id }}"
+         class="relation-items">
+      <item-element *ngFor="let item of items[0]"
+                    [item]="item"
+                    [attr.data-item-id]="item.id"></item-element>
+    </div>
+  </div>
+</ion-col>

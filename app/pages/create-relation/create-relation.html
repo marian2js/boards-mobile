@@ -14,7 +14,26 @@
     </ion-item>
   </ion-list>
 
-  <ion-list radio-group [(ngModel)]="position" *ngIf="board.relations.length">
+  <ion-list radio-group [(ngModel)]="relation.type"
+            *ngIf="board.verticalRelationEnabled && board.horizontalRelationEnabled">
+    <ion-list-header>
+      Relation Type
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Vertical</ion-label>
+      <ion-radio (click)="onTypeChanged('vertical')" item-left checked="true" value="vertical"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Horizontal</ion-label>
+      <ion-radio (click)="onTypeChanged('horizontal')" item-left value="horizontal"></ion-radio>
+    </ion-item>
+  </ion-list>
+
+  <ion-list radio-group [(ngModel)]="position" *ngIf="board[typeKey] && board[typeKey].length">
+    <ion-list-header>
+      Position
+    </ion-list-header>
     <ion-item>
       <ion-label>At the beginning</ion-label>
       <ion-radio item-left value="first"></ion-radio>
@@ -25,11 +44,11 @@
       <ion-radio item-left value="last"></ion-radio>
     </ion-item>
 
-    <ion-item *ngIf="board.relations.length > 1">
+    <ion-item *ngIf="board[typeKey].length > 1">
       <ion-label>After:</ion-label>
       <ion-radio item-left value="custom"></ion-radio>
       <ion-select [(ngModel)]="customPosition" disabled="{{ position !== 'custom' }}">
-        <ion-option *ngFor="let relation of board.relations; let f = first; let i = index"
+        <ion-option *ngFor="let relation of board[typeKey]; let f = first; let i = index"
                     value="{{ i + 1 }}"
                     selected="{{ f }}">
           {{ relation.name }}

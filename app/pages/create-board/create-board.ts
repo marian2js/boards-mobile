@@ -17,7 +17,7 @@ export class CreateBoardPage {
   private board: Board = new Board();
 
   constructor(private navCtrl: NavController, private boardService: BoardService) {
-
+    this.board.verticalRelationEnabled = true;
   }
 
   /**

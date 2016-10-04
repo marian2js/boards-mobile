@@ -1,4 +1,4 @@
-.relation-element {
+.vertical-relation {
   background-color: #e9e9e9;
   width: 250px;
   height: 100%;
@@ -17,5 +17,10 @@
   .relation-body {
     // Allows dropping items at the bottom of the list
     height: 100%;
+  }
+
+  .relation-items {
+    min-height: 125px;
+    margin-bottom: 30px;
   }
 }

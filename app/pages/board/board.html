@@ -16,7 +16,20 @@
 
     <ion-scroll scrollX="true" scrollY="true">
       <ion-row>
-        <relation-element *ngFor="let relation of board.relations" [relation]="relation"></relation-element>
+        <ion-col *ngIf="board.horizontalRelationEnabled" class="horizontal-relations">
+          <horizontal-relation *ngFor="let relation of board.horizontalRelations"
+                               [relation]="relation"
+                               [board]="board"></horizontal-relation>
+        </ion-col>
+        <vertical-relation *ngFor="let relation of board.verticalRelations; let i = index"
+                          [relation]="relation"
+                          [board]="board"
+                          [items]="items[i]"></vertical-relation>
+
+        <vertical-relation *ngIf="defaultRelation"
+                           [relation]="defaultRelation"
+                           [board]="board"
+                           [items]="items[0]"></vertical-relation>
         <ion-col>
           <button (click)="onCreateRelationPressed()">Create Relation</button>
         </ion-col>
@@ -26,6 +39,7 @@
   </scroll-content>
 </ion-content>
 
-<button *ngIf="board && board.relations.length" fab fab-bottom fab-right (click)="addIconPressed()">
+<button *ngIf="board && (board.verticalRelations.length || board.horizontalRelations.length)"
+        fab fab-bottom fab-right (click)="addIconPressed()">
   <ion-icon name="add"></ion-icon>
 </button>

@@ -26,6 +26,7 @@ export class RelationService extends ApiService {
     relation.id = data.id;
     relation.name = data.name;
     relation.position = data.position;
+    relation.type = data.type;
     relation.createdAt = data.created_at;
     return relation;
   }

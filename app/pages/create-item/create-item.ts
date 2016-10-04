@@ -17,7 +17,8 @@ import {Autofocus} from '../../directives/autofocus/autofocus';
 export class CreateItemPage {
   private item: Item = new Item();
   private board: Board;
-  private relationIndex = 0;
+  private verticalRelationIndex = 0;
+  private horizontalRelationIndex = 0;
 
   constructor(params: NavParams,
               private navCtrl: NavController,
@@ -29,9 +30,13 @@ export class CreateItemPage {
    * Create the item and close this modal
    */
   create() {
-    let relation = this.board.relations[this.relationIndex];
-    this.item.position = relation.items.length;
-    this.itemService.createItem(this.item, relation, this.board)
+    if (this.board.verticalRelationEnabled) {
+      this.item.verticalRelation = this.board.verticalRelations[this.verticalRelationIndex];
+    }
+    if (this.board.horizontalRelationEnabled) {
+      this.item.horizontalRelation = this.board.horizontalRelations[this.horizontalRelationIndex];
+    }
+    this.itemService.createItem(this.item, this.board)
       .then(() => setTimeout(() => this.navCtrl.pop(), 500));
   }
 }

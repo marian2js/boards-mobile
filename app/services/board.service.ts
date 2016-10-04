@@ -17,7 +17,7 @@ export class BoardService extends ApiService {
 
   createBoard(board: Board): Promise<Board> {
     let url = super.getApiUrl();
-    return super.post(url, board)
+    return super.post(url, BoardService.getBoardData(board))
       .then(res => BoardService.mapBoard(res));
   }
 
@@ -49,16 +49,15 @@ export class BoardService extends ApiService {
   }
 
   private setRelations(board: Board, relations: Array<any>) {
-    board.relations = relations.map(relation => RelationService.mapRelation(relation));
+    relations = relations.map(relation => RelationService.mapRelation(relation));
+    board.verticalRelations = relations.filter(relation => relation.type === 'vertical');
+    board.horizontalRelations = relations.filter(relation => relation.type === 'horizontal');
   }
 
   private setItems(board: Board, items: Array<any>) {
-    board.relations.forEach(relation => {
-      relation.items = items
-        .filter(item => item.relation === relation.id)
-        .map(item => ItemService.mapItem(item))
-        .sort((t1: Item, t2: Item) => t1.position - t2.position);
-    });
+    board.items = items
+      .map(item => ItemService.mapItem(item, board))
+      .sort((t1: Item, t2: Item) => t1.position - t2.position);
   }
 
   static mapBoard(data): Board {
@@ -66,7 +65,18 @@ export class BoardService extends ApiService {
     board.id = data.id;
     board.name = data.name;
     board.createdAt = data.created_at;
+    board.verticalRelationEnabled = data.vertical_relation;
+    board.horizontalRelationEnabled = data.horizontal_relation;
     return board;
+  }
+
+  static getBoardData(board: Board) {
+    return {
+      name: board.name,
+      vertical_relation: board.verticalRelationEnabled,
+      horizontal_relation: board.horizontalRelationEnabled
+    };
+
   }
 
 }

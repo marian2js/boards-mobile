@@ -19,10 +19,18 @@
       <ion-textarea [(ngModel)]="item.description"></ion-textarea>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Relation</ion-label>
-      <ion-select [(ngModel)]="relationIndex">
-        <ion-option *ngFor="let relation of board.relations; let i = index" value="{{ i }}">
+    <ion-item *ngIf="board.verticalRelations && board.verticalRelations.length > 1">
+      <ion-label>Vertical Relation</ion-label>
+      <ion-select [(ngModel)]="verticalRelationIndex">
+        <ion-option *ngFor="let relation of board.verticalRelations; let i = index" value="{{ i }}">
+          {{ relation.name }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="board.horizontalRelations && board.horizontalRelations.length > 1">
+      <ion-label>Horizontal Relation</ion-label>
+      <ion-select [(ngModel)]="horizontalRelationIndex">
+        <ion-option *ngFor="let relation of board.horizontalRelations; let i = index" value="{{ i }}">
           {{ relation.name }}
         </ion-option>
       </ion-select>

@@ -8,4 +8,18 @@
   .scroll-zoom-wrapper {
     height: 100%;
   }
+
+  ion-col.horizontal-relations {
+    margin-top: 44px;
+  }
+
+  .horizontal-relation {
+    white-space: initial;
+    width: 170px;
+
+    ion-card {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
 }
