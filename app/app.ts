@@ -5,6 +5,7 @@ import {ApiService} from './services/api.service';
 import {AuthService} from './services/auth.service';
 import {BoardService} from './services/board.service';
 import {RelationService} from './services/relation.service';
+import {TeamService} from './services/team.service';
 import {LoadingService} from './services/loading.service';
 import {PictureService} from './services/picture.service';
 import {StorageService} from './services/storage.service';
@@ -20,6 +21,7 @@ import {HomePage} from './pages/home/home';
     AuthService,
     BoardService,
     RelationService,
+    TeamService,
     LoadingService,
     PictureService,
     StorageService,

@@ -1,5 +1,6 @@
 import {Relation} from './relation.model';
 import {Item} from './item.model';
+import {Team} from './team.model';
 
 export class Board {
   id: string;
@@ -9,6 +10,7 @@ export class Board {
   verticalRelationEnabled: boolean;
   horizontalRelationEnabled: boolean;
   items: Array<Item> = [];
+  team: Team;
   createdAt: Date;
 
   getItemsByRelation(verticalRelation: Relation, horizontalRelation: Relation): Array<Item> {

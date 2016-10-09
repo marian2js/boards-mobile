@@ -7,8 +7,13 @@ export class User {
   gender: string;
   birthday: Date;
   createdAt: Date;
+  initials: string;
 
   isNew() {
     return !this.username;
+  }
+
+  get fullname() {
+    return `${this.firstName} ${this.lastName}`.trim();
   }
 }

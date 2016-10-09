@@ -2,9 +2,11 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Board} from '../models/board.model';
 import {User} from '../models/user.model';
+import {Team} from '../models/team.model';
 import {ApiService} from './api.service';
 import {BoardService} from './board.service';
 import {StorageService} from './storage.service';
+import {TeamService} from './team.service';
 
 const ENTITY_NAME = 'users';
 const CURRENT_USER_KEY = `${ENTITY_NAME}_current`;
@@ -57,13 +59,7 @@ export class UserService extends ApiService {
     let url = super.getApiUrl(this.currentUser.id);
     return super.get(url)
       .then(res => {
-        this.currentUser.username = res.username;
-        this.currentUser.email = res.email;
-        this.currentUser.firstName = res.first_name;
-        this.currentUser.lastName = res.last_name;
-        this.currentUser.gender = res.gender;
-        this.currentUser.birthday = res.birthday;
-        this.currentUser.createdAt = res.created_at;
+        this.currentUser = UserService.mapUser(res);
         return this.currentUser;
       });
   }
@@ -82,6 +78,12 @@ export class UserService extends ApiService {
       .then(boards => boards.map(board => BoardService.mapBoard(board)));
   }
 
+  getUserTeams(): Promise<Array<Team>> {
+    let url = super.getApiUrl(this.currentUser.id, 'teams');
+    return super.get(url)
+      .then(teams => teams.map(team => TeamService.mapTeam(team)));
+  }
+
   /**
    * Fetches user's access token
    */
@@ -89,6 +91,19 @@ export class UserService extends ApiService {
     let url = super.getApiUrl(id, 'request_access_token');
     return super.get(url, { code })
       .then(res => res.access_token);
+  }
+
+  static mapUser(data): User {
+    let user = new User();
+    user.id = data.id;
+    user.username = data.username;
+    user.email = data.email;
+    user.firstName = data.first_name;
+    user.lastName = data.last_name;
+    user.gender = data.gender;
+    user.birthday = data.birthday;
+    user.createdAt = data.created_at;
+    return user;
   }
 
 }

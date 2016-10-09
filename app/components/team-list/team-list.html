@@ -1,0 +1,9 @@
+<div class="team-list">
+  <ion-card *ngFor="let team of teams" (click)="openTeam(team)">
+    <ion-card-content>
+      <ion-card-title>
+        {{ team.name }}
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card>
+</div>

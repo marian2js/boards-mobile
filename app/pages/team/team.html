@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title *ngIf="team">
+      {{ team.name }}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="team">
+  <user-list [users]="team.getUsers()"></user-list>
+</ion-content>
+
+<button fab fab-bottom fab-right (click)="addIconPressed()">
+  <ion-icon name="add"></ion-icon>
+</button>

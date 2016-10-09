@@ -1,18 +1,13 @@
 <ion-header>
   <ion-navbar primary>
     <ion-title>
-      Live Boards
+      Teams
     </ion-title>
-    <ion-buttons end>
-      <button (click)="moreIconPressed()">
-        <ion-icon name="more"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="home">
-  <board-list [boards]="boards"></board-list>
+  <team-list [teams]="teams"></team-list>
 </ion-content>
 
 <button fab fab-bottom fab-right (click)="addIconTapped()">

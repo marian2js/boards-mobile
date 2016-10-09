@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, ActionSheetController} from 'ionic-angular';
 import {Board} from '../../models/board.model';
 import {User} from '../../models/user.model';
 import {UserService} from '../../services/user.service';
@@ -8,6 +8,7 @@ import {BoardPage} from '../board/board';
 import {CreateBoardPage} from '../create-board/create-board';
 import {WelcomePage} from '../welcome/welcome';
 import {BoardList} from '../../components/board-list/board-list';
+import {TeamsPage} from '../teams-page/teams-page';
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
@@ -18,6 +19,7 @@ export class HomePage {
   boards: Array<Board> = [];
 
   constructor(private navCtrl: NavController,
+              private actionSheetCtrl: ActionSheetController,
               private userService: UserService) {
 
   }
@@ -55,5 +57,17 @@ export class HomePage {
     this.navCtrl.push(BoardPage, {
       board
     });
+  }
+
+  moreIconPressed() {
+    this.actionSheetCtrl.create({
+      buttons: [{
+        text: 'Teams',
+        icon: 'people',
+        handler: () => {
+          this.navCtrl.push(TeamsPage);
+        }
+      }]
+    }).present();
   }
 }

@@ -64,6 +64,7 @@ export class BoardService extends ApiService {
     let board = new Board();
     board.id = data.id;
     board.name = data.name;
+    board.team = data.team;
     board.createdAt = data.created_at;
     board.verticalRelationEnabled = data.vertical_relation;
     board.horizontalRelationEnabled = data.horizontal_relation;
@@ -74,7 +75,8 @@ export class BoardService extends ApiService {
     return {
       name: board.name,
       vertical_relation: board.verticalRelationEnabled,
-      horizontal_relation: board.horizontalRelationEnabled
+      horizontal_relation: board.horizontalRelationEnabled,
+      team: board.team
     };
 
   }

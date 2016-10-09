@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>
+      Team Add User
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="team-add-user">
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Enter username or email</ion-label>
+      <ion-input [(ngModel)]="user" type="text" [autofocus]></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div padding>
+    <button block (click)="create()">Create</button>
+  </div>
+</ion-content>
