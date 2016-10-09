@@ -35,7 +35,11 @@ export class BoardPage {
   }
 
   ionViewWillEnter() {
-    this.boardService.populateBoardRelations(this.board)
+    this.boardService.populateBoard(this.board)
+      .then(board => {
+        this.board = board;
+        return this.boardService.populateBoardRelations(this.board)
+      })
       .then(() => this.boardService.populateBoardItems(this.board))
       .then(() => this.prepareBoard());
   }

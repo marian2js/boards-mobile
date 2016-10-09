@@ -21,6 +21,12 @@ export class BoardService extends ApiService {
       .then(res => BoardService.mapBoard(res));
   }
 
+  populateBoard(board: Board): Promise<Board> {
+    let url = super.getApiUrl(board.id);
+    return super.get(url)
+      .then(res => BoardService.mapBoard(res));
+  }
+
   populateBoardRelations(board: Board): Promise<any> {
     let url = super.getApiUrl(board.id, 'relations');
     return super.get(url)
