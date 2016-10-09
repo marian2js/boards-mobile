@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>
+      Select Assignees
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="select-assignees">
+  <user-list [users]="board.team.getUsers()"
+             [usersSelected]="item.assignees"
+             [select]="true"
+             (userClick)="onUserSelected()"></user-list>
+</ion-content>

@@ -6,6 +6,7 @@ import {Item} from '../models/item.model';
 import {ApiService} from './api.service';
 import {RelationService} from './relation.service';
 import {ItemService} from './item.service';
+import {TeamService} from './team.service';
 
 const ENTITY_NAME = 'boards';
 
@@ -74,6 +75,11 @@ export class BoardService extends ApiService {
     board.createdAt = data.created_at;
     board.verticalRelationEnabled = data.vertical_relation;
     board.horizontalRelationEnabled = data.horizontal_relation;
+    if (data.team && data.team.id) {
+      board.team = TeamService.mapTeam(data.team);
+    } else if (data.team) {
+      board.team = data.team;
+    }
     return board;
   }
 

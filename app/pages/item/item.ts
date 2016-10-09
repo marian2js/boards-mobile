@@ -1,20 +1,33 @@
 import {Component} from '@angular/core';
-import {NavParams} from 'ionic-angular';
+import {NavParams, NavController} from 'ionic-angular';
 import {Item} from '../../models/item.model';
+import {Board} from '../../models/board.model';
+import {SelectAssigneesPage} from '../select-assignees/select-assignees';
+import {UserList} from '../../components/user-list/user-list';
 
 @Component({
-  templateUrl: 'build/pages/item/item.html'
+  templateUrl: 'build/pages/item/item.html',
+  directives: [UserList]
 })
 export class ItemPage {
   item: Item;
+  board: Board;
   nameEditable: boolean = false;
 
-  constructor(navParams: NavParams) {
+  constructor(navParams: NavParams, private navCtrl: NavController) {
     this.item = navParams.get('item');
+    this.board = navParams.get('board');
   }
 
   toggleNameEditable() {
     this.nameEditable = !this.nameEditable;
+  }
+
+  openSelectAssignees() {
+    this.navCtrl.push(SelectAssigneesPage, {
+      item: this.item,
+      board: this.board
+    });
   }
 
 }

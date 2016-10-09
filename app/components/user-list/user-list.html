@@ -1,15 +1,19 @@
 <div class="user-list">
-  <ion-card *ngFor="let user of users">
-    <ion-card-content>
+  <ion-list>
+    <ion-list-header *ngIf="title">
+      {{ title }}
+    </ion-list-header>
+    <ion-item *ngFor="let user of users" (click)="userClicked(user)" [class.selected]="isSelected(user)">
       <ion-row>
         <ion-col width-10 *ngIf="user.initials" class="user-initials">{{ user.initials.toUpperCase() }}</ion-col>
-        <div>
-          <ion-card-title>
-            {{ user.fullname }}
-          </ion-card-title>
-          <div *ngIf="user.username">@{{ user.username }}</div>
+        <div class="user-content">
+          <h1>{{ user.fullname }}</h1>
+          <p *ngIf="user.username">@{{ user.username }}</p>
         </div>
+        <ion-col width-10 *ngIf="user.initials" class="selected-icon">
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </ion-col>
       </ion-row>
-    </ion-card-content>
-  </ion-card>
+    </ion-item>
+  </ion-list>
 </div>

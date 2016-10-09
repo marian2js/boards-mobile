@@ -14,6 +14,6 @@ export class User {
   }
 
   get fullname() {
-    return `${this.firstName} ${this.lastName}`.trim();
+    return `${this.firstName || ''} ${this.lastName || ''}`.trim();
   }
 }

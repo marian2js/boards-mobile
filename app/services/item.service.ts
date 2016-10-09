@@ -50,6 +50,11 @@ export class ItemService extends ApiService {
       item.horizontalRelation = board.horizontalRelations
         .find(relation => relation.id === data.horizontal_relation);
     }
+    if (data.assignees) {
+      item.assignees = data.assignees.map(userId => {
+        return board.team.getUsers().find(user => user.id === userId);
+      });
+    }
     return item;
   }
 
@@ -64,6 +69,9 @@ export class ItemService extends ApiService {
     }
     if (item.horizontalRelation && item.horizontalRelation.id) {
       data.horizontal_relation = item.horizontalRelation.id;
+    }
+    if (item.assignees) {
+      data.assignees = item.assignees.map(user => user.id);
     }
     return data;
   }

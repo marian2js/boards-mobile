@@ -10,6 +10,7 @@
          class="relation-items">
       <item-element *ngFor="let item of items[i]"
                     [item]="item"
+                    [board]="board"
                     [attr.data-item-id]="item.id"></item-element>
     </div>
     <div *ngIf="!board.horizontalRelationEnabled"
@@ -18,6 +19,7 @@
          class="relation-items">
       <item-element *ngFor="let item of items[0]"
                     [item]="item"
+                    [board]="board"
                     [attr.data-item-id]="item.id"></item-element>
     </div>
   </div>

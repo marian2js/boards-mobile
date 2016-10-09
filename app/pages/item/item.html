@@ -20,4 +20,15 @@
       </ion-list>
     </div>
   </div>
+  <div *ngIf="item.description">
+    <hr>
+    {{ item.description }}
+  </div>
+  <hr>
+  <div *ngIf="board.team">
+    <user-list *ngIf="item.assignees.length" [users]="item.assignees" [title]="'Assignees'"></user-list>
+    <button (click)="openSelectAssignees()" ion-button clear>
+      <ion-icon name="add"></ion-icon> Select Assignees
+    </button>
+  </div>
 </ion-content>

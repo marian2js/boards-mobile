@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Item} from '../../models/item.model';
+import {Board} from '../../models/board.model';
 import {ItemPage} from '../../pages/item/item';
 
 /**
@@ -12,6 +13,7 @@ import {ItemPage} from '../../pages/item/item';
 })
 export class ItemElement {
   @Input() item: Item;
+  @Input() board: Board;
 
   constructor(private navCtrl: NavController) {
 
@@ -22,7 +24,8 @@ export class ItemElement {
    */
   openItem() {
     this.navCtrl.push(ItemPage, {
-      item: this.item
+      item: this.item,
+      board: this.board
     });
   }
 }

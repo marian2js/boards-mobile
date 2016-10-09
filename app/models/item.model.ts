@@ -1,3 +1,4 @@
+import {User} from './user.model';
 import {Relation} from './relation.model';
 
 export class Item {
@@ -8,4 +9,5 @@ export class Item {
   createdAt: Date;
   verticalRelation: Relation;
   horizontalRelation: Relation;
+  assignees: Array<User> = [];
 }
