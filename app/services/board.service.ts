@@ -72,13 +72,15 @@ export class BoardService extends ApiService {
   }
 
   static getBoardData(board: Board) {
-    return {
+    let data: any = {
       name: board.name,
       vertical_relation: board.verticalRelationEnabled,
-      horizontal_relation: board.horizontalRelationEnabled,
-      team: board.team
+      horizontal_relation: board.horizontalRelationEnabled
     };
-
+    if (board.team && board.team.id) {
+      data.team = board.team.id;
+    }
+    return data;
   }
 
 }

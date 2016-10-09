@@ -20,6 +20,15 @@
       <ion-label> Horizontal Relation</ion-label>
       <ion-toggle [(ngModel)]="board.horizontalRelationEnabled"></ion-toggle>
     </ion-item>
+    <ion-item *ngIf="teams && teams.length">
+      <ion-label>Team</ion-label>
+      <ion-select [(ngModel)]="teamIndex">
+        <ion-option value="-1">None</ion-option>
+        <ion-option *ngFor="let team of teams; let i = index" value="{{ i }}">
+          {{ team.name }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
   </ion-list>
 
   <div padding>
