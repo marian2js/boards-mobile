@@ -29,6 +29,16 @@
         </ion-option>
       </ion-select>
     </ion-item>
+
+    <ion-item>
+      <ion-label>Language:</ion-label>
+      <ion-select [(ngModel)]="board.language">
+        <ion-option *ngFor="let language of boardService.getLanguages()"
+                    value="{{ language.key }}">
+          {{ language.value }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
   </ion-list>
 
   <div padding>

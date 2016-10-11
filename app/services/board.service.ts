@@ -55,6 +55,16 @@ export class BoardService extends ApiService {
       });
   }
 
+  getLanguages(): Array<{}> {
+    return [{
+      key: 'english',
+      value: 'English'
+    }, {
+      key: 'spanish',
+      value: 'Spanish'
+    }];
+  }
+
   private setRelations(board: Board, relations: Array<any>) {
     relations = relations.map(relation => RelationService.mapRelation(relation));
     board.verticalRelations = relations.filter(relation => relation.type === 'vertical');
@@ -75,6 +85,7 @@ export class BoardService extends ApiService {
     board.createdAt = data.created_at;
     board.verticalRelationEnabled = data.vertical_relation;
     board.horizontalRelationEnabled = data.horizontal_relation;
+    board.language = data.language;
     if (data.team && data.team.id) {
       board.team = TeamService.mapTeam(data.team);
     } else if (data.team) {
@@ -87,7 +98,8 @@ export class BoardService extends ApiService {
     let data: any = {
       name: board.name,
       vertical_relation: board.verticalRelationEnabled,
-      horizontal_relation: board.horizontalRelationEnabled
+      horizontal_relation: board.horizontalRelationEnabled,
+      language: board.language
     };
     if (board.team && board.team.id) {
       data.team = board.team.id;

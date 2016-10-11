@@ -11,6 +11,7 @@ export class Board {
   horizontalRelationEnabled: boolean;
   items: Array<Item> = [];
   team: Team;
+  language: string = 'english';
   createdAt: Date;
 
   getItemsByRelation(verticalRelation: Relation, horizontalRelation: Relation): Array<Item> {
