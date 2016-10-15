@@ -10,4 +10,5 @@ export class Item {
   verticalRelation: Relation;
   horizontalRelation: Relation;
   assignees: Array<User> = [];
+  linkRelation: Relation;
 }

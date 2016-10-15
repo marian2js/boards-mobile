@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>
+      Link Item with Relation
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="link-item">
+  <ion-list>
+    <ion-item>
+      <ion-label>Board</ion-label>
+      <ion-select [(ngModel)]="boardIndex" (ionChange)="onBoardChanged()">
+        <ion-option *ngFor="let board of boards; let i = index" value="{{ i }}">
+          {{ board.name }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="relations && relations.length">
+      <ion-label>Relation</ion-label>
+      <ion-select [(ngModel)]="relationIndex" (ionChange)="onRelationChange()">
+        <ion-option *ngFor="let relation of relations; let i = index" value="{{ i }}">
+          {{ relation.name }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-content>

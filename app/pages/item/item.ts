@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {NavParams, NavController} from 'ionic-angular';
+import {NavParams, NavController, ActionSheetController} from 'ionic-angular';
 import {Item} from '../../models/item.model';
 import {Board} from '../../models/board.model';
 import {SelectAssigneesPage} from '../select-assignees/select-assignees';
+import {LinkItemPage} from '../link-item/link-item';
 import {UserList} from '../../components/user-list/user-list';
 
 @Component({
@@ -14,7 +15,9 @@ export class ItemPage {
   board: Board;
   nameEditable: boolean = false;
 
-  constructor(navParams: NavParams, private navCtrl: NavController) {
+  constructor(navParams: NavParams,
+              private navCtrl: NavController,
+              private actionSheetCtrl: ActionSheetController) {
     this.item = navParams.get('item');
     this.board = navParams.get('board');
   }
@@ -28,6 +31,20 @@ export class ItemPage {
       item: this.item,
       board: this.board
     });
+  }
+
+  moreIconPressed() {
+    this.actionSheetCtrl.create({
+      buttons: [{
+        text: 'Link with relation',
+        icon: 'link',
+        handler: () => {
+          this.navCtrl.push(LinkItemPage, {
+            item: this.item
+          });
+        }
+      }]
+    }).present();
   }
 
 }
