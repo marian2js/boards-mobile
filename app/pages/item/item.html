@@ -36,4 +36,14 @@
       <ion-icon name="add"></ion-icon> Select Assignees
     </button>
   </div>
+  <div *ngIf="item.linkRelationItems && item.linkRelationItems.length">
+    <ion-list>
+      <ion-list-header>
+        Sub Items
+      </ion-list-header>
+      <ion-item *ngFor="let item of item.linkRelationItems" (click)="linkItemSelected(item)">
+        {{ item.name }}
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

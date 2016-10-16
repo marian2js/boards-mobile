@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Board} from '../models/board.model';
-import {Relation} from '../models/relation.model';
 import {Item} from '../models/item.model';
 import {ApiService} from './api.service';
+import {RelationService} from './relation.service';
 
 const ENTITY_NAME = 'items';
 
@@ -35,6 +35,12 @@ export class ItemService extends ApiService {
       .then(res => ItemService.mapItem(res, board));
   }
 
+  populateItem(item: Item, board: Board): Promise<Item> {
+    let url = super.getApiUrl(item.id);
+    return super.get(url)
+      .then(res => ItemService.mapItem(res, board));
+  }
+
   static mapItem(data, board: Board): Item {
     let item = new Item();
     item.id = data.id;
@@ -42,7 +48,6 @@ export class ItemService extends ApiService {
     item.description = data.description;
     item.position = data.position;
     item.createdAt = data.created_at;
-    item.linkRelation = data.link_relation;
     if (data.vertical_relation) {
       item.verticalRelation = board.verticalRelations
         .find(relation => relation.id === data.vertical_relation);
@@ -55,6 +60,15 @@ export class ItemService extends ApiService {
       item.assignees = data.assignees.map(userId => {
         return board.team.getUsers().find(user => user.id === userId);
       });
+    }
+    if (data.link_relation && data.link_relation.id) {
+      item.linkRelation = RelationService.mapRelation(data.link_relation);
+    } else if (data.link_relation) {
+      item.linkRelation = data.link_relation;
+    }
+    if (data.link_relation_items && data.link_relation_items.length) {
+      item.linkRelationItems = data.link_relation_items
+        .map(itemData => ItemService.mapItem(itemData, board));
     }
     return item;
   }
