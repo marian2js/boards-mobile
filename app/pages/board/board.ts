@@ -136,4 +136,15 @@ export class BoardPage {
       }]
     }).present();
   }
+
+  canAddItems() {
+    let canAdd = !!this.board;
+    if (this.board && this.board.verticalRelationEnabled) {
+      canAdd = canAdd && !!this.board.verticalRelations.length;
+    }
+    if (this.board && this.board.horizontalRelationEnabled) {
+      canAdd = canAdd && !!this.board.horizontalRelations.length;
+    }
+    return canAdd;
+  }
 }
