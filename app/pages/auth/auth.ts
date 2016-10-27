@@ -28,6 +28,14 @@ export class AuthPage {
   }
 
   /**
+   * Process Facebook authentication
+   */
+  githubLogin() {
+    this.authService.processGitHubAuth()
+      .then(() => this.completeAuth());
+  }
+
+  /**
    * On successful authentication, redirect to HomePage
    */
   private completeAuth() {

@@ -32,6 +32,13 @@ export class AuthService {
   }
 
   /**
+   * Process the authentication with GitHub
+   */
+  processGitHubAuth() {
+    return this.doExternalAuth('github');
+  }
+
+  /**
    * Process an external authentication and save the current user
    */
   private doExternalAuth(provider): Promise<any> {
