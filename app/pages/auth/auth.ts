@@ -20,6 +20,14 @@ export class AuthPage {
   }
 
   /**
+   * Process Facebook authentication
+   */
+  facebookLogin() {
+    this.authService.processFacebookAuth()
+      .then(() => this.completeAuth());
+  }
+
+  /**
    * On successful authentication, redirect to HomePage
    */
   private completeAuth() {

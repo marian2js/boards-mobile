@@ -25,6 +25,13 @@ export class AuthService {
   }
 
   /**
+   * Process the authentication with Facebook
+   */
+  processFacebookAuth() {
+    return this.doExternalAuth('facebook');
+  }
+
+  /**
    * Process an external authentication and save the current user
    */
   private doExternalAuth(provider): Promise<any> {
