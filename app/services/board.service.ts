@@ -40,14 +40,14 @@ export class BoardService extends ApiService {
       .then(items => this.setItems(board, items));
   }
 
-  exportPrintableBoard(board: Board): Promise<any> {
-    let url = super.getApiUrl(board.id, 'export/printable');
+  exportBoard(board: Board): Promise<any> {
+    let url = super.getApiUrl(board.id, 'export');
     return super.getFile(url, { format: 'html' })
       .then(file => Printer.print(file, {}));
   }
 
-  importPrintableBoard(board: Board, image) {
-    let url = super.getApiUrl(board.id, 'import/printable');
+  importBoard(board: Board, image): Promise<any> {
+    let url = super.getApiUrl(board.id, 'import');
     return super.uploadFile(url, image, 'image')
       .then(res => {
         this.setRelations(board, res.relations);

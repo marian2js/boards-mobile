@@ -125,13 +125,13 @@ export class BoardPage {
         icon: 'camera',
         handler: () => {
           this.pictureService.getPicture()
-            .then(image => this.boardService.importPrintableBoard(this.board, image));
+            .then(image => this.boardService.importBoard(this.board, image));
         }
       }, {
         text: 'Print',
         icon: 'print',
         handler: () => {
-          this.boardService.exportPrintableBoard(this.board);
+          this.boardService.exportBoard(this.board);
         }
       }]
     }).present();
